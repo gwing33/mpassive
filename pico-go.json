@@ -1,0 +1,5 @@
+{
+    "sync_folder": "./hardware/",
+    "open_on_start": false,
+    "auto_connect": false
+}
