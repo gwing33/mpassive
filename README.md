@@ -1,8 +1,11 @@
 # mpassive
 
-### Useful python commands
+### Running Server locally
 
 ```bash
+# Change to the server directory
+cd ./server
+
 # Create a venv
 python3 -m venv .
 
@@ -12,9 +15,9 @@ source bin/activate
 # Install libraries
 pip install -r requirements.txt
 
-# Start django project
-python -m django startproject mpassive .
+# Run migrations
+python manage.py migrate
 
 # Run django project
-python server/manage.py runserver
+python manage.py runserver
 ```
