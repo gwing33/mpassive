@@ -39,12 +39,16 @@ def activate_account(request):
 
     if form.is_valid():
         data = form.cleaned_data
-        user = User(
+        user = User.objects.create_superuser(
             email=data.get('email'),
             username=data.get('email'),
+            password=data.get('password'),
         )
-        user.set_password(data.get('password'))
-        user.save()
+        user = authenticate(username=data.get('email'), password=data.get('password'))
+        if user:
+            login(request, user)
+            return redirect('/')
+        
         return redirect('/login')
 
     context = {'activate_form': form.as_p()}
