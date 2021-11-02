@@ -39,8 +39,13 @@ def activate_account(request):
 
     if form.is_valid():
         data = form.cleaned_data
-        user = User(email=data.get('email'), password=data.get('password'))
+        user = User(
+            email=data.get('email'),
+            username=data.get('email'),
+        )
+        user.set_password(data.get('password'))
         user.save()
+        return redirect('/login')
 
     context = {'activate_form': form.as_p()}
 
@@ -55,11 +60,19 @@ def login_view(request):
     if not user:
         return redirect('/activate')
 
-    username = request.POST.get('username')
+    email = request.POST.get('email')
     password = request.POST.get('password')
-    user = authenticate(request, username=username, password=password)
+    user = authenticate(username=email, password=password)
+    user2 = User.objects.first();
+    print('user', user, user2.username == email, user2.password == password)
     if user is not None:
         login(request, user)
         return redirect('/')
 
-    return render(request, template_name='login.html')
+    form = ActivateForm(data={
+        'email': email,
+        'password': '',
+    })
+    context = {'activate_form': form.as_p()}
+
+    return render(request, template_name='login.html', context=context)
