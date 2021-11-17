@@ -16,12 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from .views import login_view, activate_account, home_view
+from mpassive.mp_app.views import login_view, activate_account, home_view
+from mpassive.mp_api.urls import urlpatterns
 
 urlpatterns = [
     path('', home_view),
     path('activate', activate_account),
     path('login', login_view),
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls'))
-]
+] + urlpatterns
