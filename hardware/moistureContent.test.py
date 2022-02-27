@@ -24,7 +24,8 @@ def runTestSuite(tests):
         print('    "' + failure[0] + '" failed to match ', failure[1], ' with ', failure[2])
         
 runTestSuite([
-    ['Min Value', formatToPercentage(resistanceToPercentage(22400000001)), '<7%'],
-    ['Max Value', formatToPercentage(resistanceToPercentage(460000)), '>25%'],
-    ['One million', formatToPercentage(resistanceToPercentage(1000000)), '22.68%'],
+    ['Douglas: Min Value', formatToPercentage(resistanceToPercentage(22400000001)), '<7%'],
+    ['Douglas: Max Value', formatToPercentage(resistanceToPercentage(460000)), '>25%'],
+    ['Douglas: One million', formatToPercentage(resistanceToPercentage(1000000)), '22.68%'],
+    ['White Pine: Test', formatToPercentage(resistanceToPercentage(850000000, 'white pine')), '10%'],
 ])
